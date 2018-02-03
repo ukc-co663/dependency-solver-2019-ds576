@@ -14,6 +14,6 @@ clean:
 	rm -rf classes
 
 reallyclean: clean
-	rm -rf libs deps
+	rm -rf lib deps
 
 .PHONY: all compile test clean reallyclean

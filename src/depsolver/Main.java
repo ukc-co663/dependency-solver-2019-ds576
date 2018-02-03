@@ -40,6 +40,9 @@ public class Main {
     TypeReference<List<String>> strListType = new TypeReference<List<String>>() {};
     List<String> initial = JSON.parseObject(readFile(args[1]), strListType);
     List<String> constraints = JSON.parseObject(readFile(args[2]), strListType);
+
+    // CONTINUE HERE: using repo, initial and constraints, compute a solution
+    // and print the answer
   }
 
   static String readFile(String filename) throws IOException {
