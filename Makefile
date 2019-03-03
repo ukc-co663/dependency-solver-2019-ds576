@@ -1,7 +1,6 @@
 all: compile
 
 compile: deps
-	./compile.sh
 
 deps:
 	./install_deps.sh

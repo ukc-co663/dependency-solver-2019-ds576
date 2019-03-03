@@ -1,3 +1,2 @@
 #!/bin/bash
-CLASSPATH=classes:$(ls lib/* | tr ' \n ' '::')
-java -cp $CLASSPATH depsolver.Main $@
+python3 src/dep_manager.py "$@"
