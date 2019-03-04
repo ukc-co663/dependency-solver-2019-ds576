@@ -102,8 +102,8 @@ def calculate_output(repo, state, cycles, install, uninstall):
 
         permutations = temp if len(permutations) == 0 else [list(set(list_flatten(list(perm)))) for perm in list(itertools.product(permutations, temp))]
 
-    # Check permutations
 
+    # Check permutations
     solutions = []
     for perm in permutations:
         valid, params = solver.solve(perm)
@@ -115,7 +115,6 @@ def calculate_output(repo, state, cycles, install, uninstall):
     if len(solutions) > 0:
         solutions.sort(key = lambda x:x[0])
         output_text = json.dumps(solutions[0][1])
-        output_text = output_text.replace(" ", "")
         print(output_text)
     else:
         print([])
