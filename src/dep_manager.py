@@ -114,7 +114,7 @@ def calculate_output(repo, state, cycles, install, uninstall):
 
     if len(solutions) > 0:
         solutions.sort(key = lambda x:x[0])
-        print(solutions[0][1])
+        print(json.dumps(solutions[0][1]))
     else:
         print([])
 
