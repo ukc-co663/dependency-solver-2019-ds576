@@ -1,10 +1,12 @@
 __all__ = [
+    'cyclic',
+    'dep_expander',
     'dep_manager',
     'logger',
+    'package_filter',
     'package',
     'parse_input',
-    'sat_solver_pyco',
     'sat_solver_satispy',
-    'package_filter',
-    'dep_expander'
+    'topo_packages',
+    'util'
 ]
