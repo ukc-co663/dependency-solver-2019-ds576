@@ -114,7 +114,9 @@ def calculate_output(repo, state, cycles, install, uninstall):
 
     if len(solutions) > 0:
         solutions.sort(key = lambda x:x[0])
-        print(json.dumps(solutions[0][1]))
+        output_text = json.dumps(solutions[0][1])
+        output_text = output_text.replace(" ", "")
+        print(output_text)
     else:
         print([])
 
