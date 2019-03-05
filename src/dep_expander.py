@@ -124,6 +124,9 @@ class DepExpander:
         total_weight = 0
         uninstall_weight = 1000000
 
+        if identifier_list == None:
+            return total_weight
+
         for identifier in identifier_list:
 
             # Uninstall

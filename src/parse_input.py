@@ -79,14 +79,13 @@ def generate_state(repo, state_json):
     # Create a current state list of package objects.
     state = []
     for package in state_json:
-
         name, version = package.split('=')
         state.append(package)
 
     return state
 
 
-def generate_actions(repo, constraint_json):
+def generate_actions(repo, state, constraint_json):
     """Takes a JSON constraint description and Package repo and generates
     two corresponding lists of Package constraints, one positive and one negative."""
 
@@ -105,6 +104,12 @@ def generate_actions(repo, constraint_json):
         if constraint_type == '-':
             uninstall.append(packages)
         elif constraint_type == '+':
-            install.append(packages)
+            name, _ = packages[0].split('=')
+            add = True
+            for p in packages:
+                if p in state:
+                    add = False
+            if add:
+                install.append(packages)
 
     return install, uninstall

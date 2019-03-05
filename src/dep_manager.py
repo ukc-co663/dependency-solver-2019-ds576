@@ -59,7 +59,7 @@ def main():
     # Parse JSON in internal representation.
     repo = pi.generate_repo(repo_json)
     state = pi.generate_state(repo, state_json)
-    install, uninstall = pi.generate_actions(repo, const_json)
+    install, uninstall = pi.generate_actions(repo, state, const_json)
     cycles = cy.calculate_cycles(repo)
 
     # Debug output.
@@ -105,6 +105,10 @@ def calculate_output(repo, state, cycles, install, uninstall):
 
 
     # Check permutations
+    if permutations == [[]]:
+        print([])
+        return
+
     solutions = []
     for perm in permutations:
         valid, params = solver.solve(perm)
