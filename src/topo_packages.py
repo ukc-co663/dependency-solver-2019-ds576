@@ -15,7 +15,7 @@ class TopoSorter:
         """"""
 
         install = [p for p in solution if '-' not in p]
-        uninstall = [p[1:] for p in solution if '-' in p]
+        uninstall = [p for p in solution if '-' in p]
         f_solution = self._format(solution)
         output = list(toposort_flatten(f_solution))
 
@@ -24,6 +24,11 @@ class TopoSorter:
             p = "+{}".format(p)
             if p not in output:
                 non_dependent.append("+{}".format(p))
+                output.insert(0, p)
+
+        # print(uninstall)
+        for p in uninstall:
+            if p not in output and p[1:] in self.state:
                 output.insert(0, p)
 
         return output

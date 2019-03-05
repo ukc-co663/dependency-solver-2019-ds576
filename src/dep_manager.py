@@ -88,11 +88,12 @@ def calculate_output(repo, state, cycles, install, uninstall):
     uninstall_requirement = []
     for package_set in uninstall:
         for identifier in package_set:
-            uninstall_requirement.append(identifier)
+            uninstall_requirement.append("-{}".format(identifier))
 
 
     # For each set of installs generate the set of permutations.
     permutations = []
+    permutations.append(uninstall_requirement)
     for install_opt in install:
 
         # For each installable package:
