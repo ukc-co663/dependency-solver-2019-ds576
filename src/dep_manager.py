@@ -60,7 +60,6 @@ def main():
     repo = pi.generate_repo(repo_json)
     state = pi.generate_state(repo, state_json)
     install, uninstall = pi.generate_actions(repo, state, const_json)
-    cycles = cy.calculate_cycles(repo)
 
     # Debug output.
     logging.debug("Repo: {}".format(repo))
@@ -68,10 +67,15 @@ def main():
     logging.debug("Install constraints: {}".format(install))
     logging.debug("Uninstall constraint: {}".format(uninstall))
 
-    calculate_output(repo = repo, state = state, cycles = cycles, install = install, uninstall = uninstall)
+    # Base case that nothing requires installation or removal.
+    if install == [] and uninstall == []:
+        print("[]")
+        return
+
+    calculate_linear_output(repo = repo, state = state, install = install, uninstall = uninstall)
 
 
-def calculate_output(repo, state, cycles, install, uninstall):
+def calculate_linear_output(repo, state, install, uninstall):
     """
     Given a repo description, current state and set of constraints,
     calculate if a valid state T can be produced that meets that constraints.
@@ -81,7 +85,8 @@ def calculate_output(repo, state, cycles, install, uninstall):
     """
 
     solver = SATSolver()
-    dep_expander = DepExpander(repo)
+    cycles = cy.calculate_cycles(repo)
+    dep_expander = DepExpander(repo, cycles)
     sorter = TopoSorter(repo, state)
 
     # Generate required set of initial uninstalls.
@@ -123,6 +128,10 @@ def calculate_output(repo, state, cycles, install, uninstall):
         print(output_text)
     else:
         print([])
+
+
+def calculate_iterative_output():
+    pass
 
 
 

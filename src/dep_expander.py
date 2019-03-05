@@ -7,10 +7,10 @@ import time
 
 class DepExpander:
 
-    def __init__(self, repo):
+    def __init__(self, repo, cycles):
         self.repo = repo
         self.p_filter = PackageFilter(repo)
-        self.cycles = cy.calculate_cycles(repo)
+        self.cycles = cycles
         self.explored = {}
         self.history = []
 

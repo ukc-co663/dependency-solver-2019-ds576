@@ -100,16 +100,29 @@ def generate_actions(repo, state, constraint_json):
         identifier = package[1:]
         packages = p_filter.get_identifiers(identifier)
 
-        # Sort packages into install and uninstall.
+        # install constraint list.
         if constraint_type == '-':
-            uninstall.append(packages)
+            temp = []
+            for p in packages:
+                name, version = p.split('=')
+                if name in repo:
+                    if version in repo[name]:
+                        temp.append(p)
+            uninstall.append(temp)
+
+        # Uninstall constraint list.
         elif constraint_type == '+':
-            name, _ = packages[0].split('=')
+            name, version = packages[0].split('=')
             add = True
             for p in packages:
                 if p in state:
                     add = False
             if add:
+                temp = []
+                for p in packages:
+                    if name in repo:
+                        if version in repo[name]:
+                            temp.append(p)
                 install.append(packages)
 
     return install, uninstall
